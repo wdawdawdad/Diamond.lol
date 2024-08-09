@@ -41,10 +41,29 @@ nav a {
     color: #ff0000;
 }
 
-.game-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 20px;
+/* Style for the category buttons */
+.category-buttons {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
+
+.category-buttons .btn {
+    background: linear-gradient(45deg, #ff0000, #800080);
+    border: none;
+    padding: 15px 30px;
+    color: white;
+    text-transform: uppercase;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 50px;
+    transition: background 0.3s ease;
+}
+
+.category-buttons .btn:hover {
+    background: linear-gradient(45deg, #ff5757, #9933cc);
 }
 
 footer {
