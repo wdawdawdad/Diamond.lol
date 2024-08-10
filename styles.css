@@ -1,86 +1,37 @@
-body {
-    margin: 0;
-    font-family: 'Roboto', sans-serif;
-    background-color: #222;
-    color: white;
+/* Update Log Modal Styles */
+.update-log {
+    display: none; /* Hidden by default */
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
 }
 
-header {
-    background: linear-gradient(90deg, #ff0000, #800080);
-    padding: 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.logo {
-    font-size: 24px;
-    font-weight: bold;
-}
-
-nav ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    gap: 20px;
-}
-
-nav a {
-    color: white;
-    text-decoration: none;
-    font-weight: 500;
-}
-
-.featured, .categories {
-    padding: 40px;
+.update-log-content {
     background-color: #333;
-}
-
-.featured h2, .categories h2 {
-    color: #ff0000;
-}
-
-/* Style for the category buttons */
-.category-buttons {
-    display: flex;
-    gap: 15px;
-    flex-wrap: wrap;
-    margin-top: 20px;
-}
-
-.category-buttons .btn {
-    background-color: #666;
-    border: none;
-    padding: 15px 30px;
     color: white;
-    font-weight: bold;
-    text-transform: uppercase;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.category-buttons .btn:hover {
-    background-color: #888;
-}
-
-footer {
-    background-color: #111;
+    margin: 15% auto;
     padding: 20px;
-    text-align: center;
-    color: #777;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 500px;
+    border-radius: 10px;
 }
 
-footer ul {
-    list-style: none;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-    gap: 20px;
+.close-btn {
+    color: white;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
 }
 
-footer a {
-    color: #777;
+.close-btn:hover,
+.close-btn:focus {
+    color: #bbb;
     text-decoration: none;
+    cursor: pointer;
 }
