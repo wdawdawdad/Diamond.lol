@@ -33,7 +33,7 @@ nav a {
     font-weight: 500;
 }
 
-.main {
+main {
     padding: 40px;
     background-color: #333;
 }
@@ -170,6 +170,7 @@ footer a {
 
 /* Game Details Page Styles */
 .game-details {
+    text-align: center;
     padding: 40px;
     background-color: #333;
     color: white;
@@ -186,6 +187,7 @@ footer a {
 
 .game-screenshots {
     display: flex;
+    justify-content: center;
     gap: 10px;
     margin-bottom: 30px;
 }
@@ -194,6 +196,7 @@ footer a {
     width: 100%;
     max-width: 300px;
     border-radius: 10px;
+    height: auto;
 }
 
 .download-btn {
