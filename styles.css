@@ -33,12 +33,12 @@ nav a {
     font-weight: 500;
 }
 
-.featured, .categories {
+.main {
     padding: 40px;
     background-color: #333;
 }
 
-.featured h2, .categories h2 {
+h2 {
     color: #ff0000;
 }
 
@@ -66,6 +66,7 @@ nav a {
     background-color: #888;
 }
 
+/* Footer Styles */
 footer {
     background-color: #111;
     padding: 20px;
@@ -122,4 +123,88 @@ footer a {
     color: #bbb;
     text-decoration: none;
     cursor: pointer;
+}
+
+/* Game Card Styles */
+.game-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.game-card {
+    background-color: #333;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    width: 250px;
+}
+
+.game-card img {
+    width: 100%;
+    border-radius: 10px;
+}
+
+.game-card h3 {
+    margin: 15px 0 10px;
+    color: #ff0000;
+}
+
+.game-card p {
+    color: #ccc;
+}
+
+.game-card .btn {
+    background-color: #666;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    display: inline-block;
+    margin-top: 10px;
+}
+
+.game-card .btn:hover {
+    background-color: #888;
+}
+
+/* Game Details Page Styles */
+.game-details {
+    padding: 40px;
+    background-color: #333;
+    color: white;
+}
+
+.game-details h1 {
+    color: #ff0000;
+    margin-bottom: 20px;
+}
+
+.game-details p {
+    margin-bottom: 30px;
+}
+
+.game-screenshots {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 30px;
+}
+
+.game-screenshots img {
+    width: 100%;
+    max-width: 300px;
+    border-radius: 10px;
+}
+
+.download-btn {
+    background-color: #666;
+    color: white;
+    padding: 15px 30px;
+    border-radius: 5px;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.download-btn:hover {
+    background-color: #888;
 }
