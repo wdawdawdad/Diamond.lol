@@ -1,61 +1,73 @@
-body {
-    font-family: Arial, sans-serif;
+/* Reset some basic styles */
+body, h1, form, input, button {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
 
-header {
-    background: #007bff;
-    color: white;
+body {
+    font-family: Arial, sans-serif;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: url('https://wallpaperaccess.com/full/346806.jpg') no-repeat center center fixed;
+    background-size: cover;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.form-container {
+    background: rgba(255, 255, 255, 0.8); /* semi-transparent white background */
     padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    width: 300px;
     text-align: center;
 }
 
-nav ul {
-    list-style: none;
-    padding: 0;
+h1 {
+    margin-bottom: 20px;
+    font-size: 24px;
 }
 
-nav ul li {
-    display: inline;
-    margin: 0 15px;
-}
-
-nav ul li a {
-    color: white;
-    text-decoration: none;
-}
-
-#hero {
-    background: #f8f9fa;
-    padding: 50px;
-    text-align: center;
-}
-
-.cta-button {
-    background: #007bff;
-    color: white;
-    padding: 10px 20px;
-    text-decoration: none;
-    border-radius: 5px;
-}
-
-section {
-    padding: 20px;
-    margin: 20px 0;
-}
-
-.pricing-plan {
-    border: 1px solid #007bff;
-    padding: 20px;
-    margin: 10px;
-    display: inline-block;
-    width: 45%;
-}
-
-footer {
-    background: #007bff;
-    color: white;
-    text-align: center;
+input {
+    width: 100%;
     padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+p {
+    margin-top: 10px;
+}
+
+a {
+    color: #007BFF;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
 }
