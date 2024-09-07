@@ -1,5 +1,4 @@
-/* Reset some basic styles */
-body, h1, form, input, button {
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -7,66 +6,63 @@ body, h1, form, input, button {
 
 body {
     font-family: Arial, sans-serif;
+    background: url('https://wallpaperaccess.com/full/2159510.jpg') no-repeat center center fixed;
+    background-size: cover;
     height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    background: url('https://wallpaperaccess.com/full/346806.jpg') no-repeat center center fixed;
-    background-size: cover;
-    padding: 20px;
 }
 
-.form-container {
-    background: rgba(255, 255, 255, 0.9); /* slightly more opaque background */
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+.form-box {
+    background: rgba(255, 255, 255, 0.8);
     padding: 30px;
     border-radius: 10px;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
-    width: 350px;
+    width: 300px;
     text-align: center;
-    max-width: 100%;
 }
 
-h1 {
-    margin-bottom: 20px;
-    font-size: 28px;
-    color: #333;
+.input-group {
+    margin: 20px 0;
 }
 
-input {
-    width: calc(100% - 20px);
-    padding: 15px;
-    margin: 10px 0;
+.input-group input {
+    width: 100%;
+    padding: 10px;
     border: 1px solid #ddd;
     border-radius: 5px;
-    font-size: 16px;
 }
 
-button {
-    width: calc(100% - 20px);
-    padding: 15px;
-    background-color: #007BFF;
-    color: white;
+.btn {
+    width: 100%;
+    padding: 10px;
     border: none;
+    background-color: #333;
+    color: white;
+    font-size: 16px;
     border-radius: 5px;
     cursor: pointer;
-    font-size: 16px;
-    margin: 10px 0;
+    transition: background-color 0.3s;
 }
 
-button:hover {
-    background-color: #0056b3;
+.btn:hover {
+    background-color: #555;
 }
 
-p {
-    margin-top: 10px;
+.message {
+    margin-top: 15px;
     font-size: 14px;
 }
 
-a {
-    color: #007BFF;
+.message a {
+    color: #333;
     text-decoration: none;
-}
-
-a:hover {
-    text-decoration: underline;
 }
