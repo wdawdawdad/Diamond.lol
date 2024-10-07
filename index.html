@@ -3,26 +3,51 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login or Signup</title>
-    <link rel="stylesheet" href="styles.css">
-    <!-- Placement script -->
-    <script data-cfasync="false" src="//dcbbwymp1bhlf.cloudfront.net/?wbbcd=1090912"></script>
+    <title>Monke Map Hub Quest</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
-        <div class="form-box">
-            <h2>Login</h2>
-            <form>
-                <div class="input-group">
-                    <input type="text" placeholder="Username" required>
-                </div>
-                <div class="input-group">
-                    <input type="password" placeholder="Password" required>
-                </div>
-                <button type="submit" class="btn">Login</button>
-                <p class="message">Not registered? <a href="https://wdawdawdad.github.io/Diamond.lol/firewatch.html">Create an account</a></p>
-            </form>
-        </div>
-    </div>
+    <header>
+        <h1>Monke Map Hub Quest</h1>
+        <nav>
+            <a href="#home">Home</a>
+            <a href="#upload">Upload</a>
+            <a href="#maps">Maps</a>
+        </nav>
+    </header>
+    
+    <section id="home">
+        <h2>Welcome to Monke Map Hub Quest!</h2>
+        <p>Upload and explore custom Gorilla Tag maps.</p>
+    </section>
+
+    <section id="upload">
+        <h2>Upload Your Map</h2>
+        <form action="/upload" method="post" enctype="multipart/form-data">
+            <label for="mapName">Map Name:</label>
+            <input type="text" id="mapName" name="mapName" required>
+            
+            <label for="description">Description:</label>
+            <textarea id="description" name="description" required></textarea>
+
+            <label for="mapFile">Map File:</label>
+            <input type="file" id="mapFile" name="mapFile" required>
+
+            <button type="submit">Upload Map</button>
+        </form>
+    </section>
+
+    <section id="maps">
+        <h2>Available Maps</h2>
+        <ul>
+            <li>Map 1</li>
+            <li>Map 2</li>
+            <li>Map 3</li>
+        </ul>
+    </section>
+    
+    <footer>
+        <p>© 2024 Monke Map Hub Quest</p>
+    </footer>
 </body>
 </html>
