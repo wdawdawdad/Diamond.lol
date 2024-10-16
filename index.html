@@ -3,51 +3,81 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Monke Map Hub Quest</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Unity Packages</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #282c34;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        nav {
+            margin: 0;
+            padding: 10px;
+            text-align: center;
+        }
+        nav a {
+            margin: 0 15px;
+            text-decoration: none;
+            color: #61dafb;
+        }
+        section {
+            padding: 20px;
+        }
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #282c34;
+            color: white;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+    </style>
 </head>
 <body>
     <header>
-        <h1>Monke Map Hub Quest</h1>
-        <nav>
-            <a href="#home">Home</a>
-            <a href="#upload">Upload</a>
-            <a href="#maps">Maps</a>
-        </nav>
+        <h1>My Unity Packages</h1>
     </header>
-    
+
+    <nav>
+        <a href="#home">Home</a>
+        <a href="#packages">Packages</a>
+        <a href="#documentation">Documentation</a>
+        <a href="#contact">Contact</a>
+    </nav>
+
     <section id="home">
-        <h2>Welcome to Monke Map Hub Quest!</h2>
-        <p>Upload and explore custom Gorilla Tag maps.</p>
+        <h2>Welcome to My Unity Packages Website</h2>
+        <p>Explore and download my Unity packages for your game development projects.</p>
     </section>
 
-    <section id="upload">
-        <h2>Upload Your Map</h2>
-        <form action="/upload" method="post" enctype="multipart/form-data">
-            <label for="mapName">Map Name:</label>
-            <input type="text" id="mapName" name="mapName" required>
-            
-            <label for="description">Description:</label>
-            <textarea id="description" name="description" required></textarea>
-
-            <label for="mapFile">Map File:</label>
-            <input type="file" id="mapFile" name="mapFile" required>
-
-            <button type="submit">Upload Map</button>
-        </form>
-    </section>
-
-    <section id="maps">
-        <h2>Available Maps</h2>
+    <section id="packages">
+        <h2>Available Packages</h2>
         <ul>
-            <li>Map 1</li>
-            <li>Map 2</li>
-            <li>Map 3</li>
+            <li><a href="#">Package 1</a> - Description of Package 1</li>
+            <li><a href="#">Package 2</a> - Description of Package 2</li>
+            <!-- Add more packages here -->
         </ul>
     </section>
-    
+
+    <section id="documentation">
+        <h2>Documentation</h2>
+        <p>Find detailed documentation for each package <a href="#">here</a>.</p>
+    </section>
+
+    <section id="contact">
+        <h2>Contact</h2>
+        <p>Have questions? Reach out to me at <a href="mailto:your-email@example.com">your-email@example.com</a></p>
+    </section>
+
     <footer>
-        <p>© 2024 Monke Map Hub Quest</p>
+        <p>&copy; 2024 My Unity Packages</p>
     </footer>
 </body>
 </html>
