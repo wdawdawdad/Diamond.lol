@@ -5,68 +5,59 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Unity Packages</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
+        body, html {
             margin: 0;
             padding: 0;
-            background: linear-gradient(to bottom, red, black);
+            overflow: hidden;
+            font-family: Arial, sans-serif;
+        }
+
+        /* Background */
+        body {
+            background: url('https://th.bing.com/th/id/R.fc4ea3dcd1fa4df18f524826d21c5540?rik=vECBB9DhmH%2f0zA&pid=ImgRaw&r=0') no-repeat center center fixed;
+            background-size: cover;
             color: white;
         }
-        header {
-            background-color: rgba(0, 0, 0, 0.8);
-            color: white;
-            padding: 20px;
-            text-align: center;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
-        }
-        nav {
-            padding: 10px;
-            text-align: center;
-            background-color: rgba(0, 0, 0, 0.7);
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
-            position: sticky;
+
+        /* Floating Canvas for Spheres */
+        canvas {
+            position: absolute;
             top: 0;
+            left: 0;
+            z-index: -1;
         }
-        nav a {
-            margin: 0 15px;
-            text-decoration: none;
-            color: #ff6666;
-            font-weight: bold;
-            transition: color 0.3s;
-        }
-        nav a:hover {
-            color: #ffcccc;
-        }
-        section {
-            padding: 40px;
+
+        /* Main Content */
+        header {
             text-align: center;
+            padding: 50px;
+            background-color: rgba(0, 0, 0, 0.6);
+            color: white;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
         }
-        h2 {
-            margin-bottom: 20px;
-            color: #ffcccc;
+
+        section {
+            text-align: center;
+            padding: 30px;
         }
+
+        h1, h2 {
+            margin: 0;
+            padding-bottom: 20px;
+        }
+
         ul {
-            list-style: none;
-            padding: 0;
+            list-style-type: none;
         }
+
         li {
-            margin: 10px 0;
-            padding: 10px;
-            background-color: rgba(255, 255, 255, 0.1);
-            border-radius: 10px;
+            margin-bottom: 20px;
         }
-        li a {
-            color: #ffcccc;
-            text-decoration: none;
-            font-size: 1.2em;
-        }
-        li a:hover {
-            text-decoration: underline;
-        }
+
         footer {
             text-align: center;
             padding: 20px;
-            background-color: rgba(0, 0, 0, 0.8);
+            background-color: rgba(0, 0, 0, 0.6);
             color: white;
             position: fixed;
             width: 100%;
@@ -75,14 +66,10 @@
     </style>
 </head>
 <body>
+
     <header>
         <h1>My Unity Packages</h1>
     </header>
-
-    <nav>
-        <a href="#home">Home</a>
-        <a href="#packages">Packages</a>
-    </nav>
 
     <section id="home">
         <h2>Welcome to My Unity Packages Website</h2>
@@ -94,12 +81,102 @@
         <ul>
             <li><a href="#">Package 1</a> - Description of Package 1</li>
             <li><a href="#">Package 2</a> - Description of Package 2</li>
-            <!-- Add more packages here -->
         </ul>
     </section>
 
     <footer>
         <p>&copy; 2024 My Unity Packages</p>
     </footer>
+
+    <canvas id="floatingSpheres"></canvas>
+
+    <script>
+        // Sphere and Line Animation
+        const canvas = document.getElementById('floatingSpheres');
+        const ctx = canvas.getContext('2d');
+
+        let width, height;
+        const spheres = [];
+        const sphereCount = 50;
+        const maxDistance = 150;
+
+        // Resize canvas to fit window
+        function resizeCanvas() {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+        }
+
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        // Create spheres
+        class Sphere {
+            constructor(x, y) {
+                this.x = x;
+                this.y = y;
+                this.vx = (Math.random() - 0.5) * 1.5;
+                this.vy = (Math.random() - 0.5) * 1.5;
+                this.radius = 2;
+            }
+
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                ctx.fillStyle = 'white';
+                ctx.fill();
+            }
+
+            update() {
+                this.x += this.vx;
+                this.y += this.vy;
+
+                if (this.x < 0 || this.x > width) this.vx = -this.vx;
+                if (this.y < 0 || this.y > height) this.vy = -this.vy;
+            }
+        }
+
+        // Create initial spheres
+        for (let i = 0; i < sphereCount; i++) {
+            const sphere = new Sphere(Math.random() * width, Math.random() * height);
+            spheres.push(sphere);
+        }
+
+        // Draw connecting lines
+        function drawLines() {
+            for (let i = 0; i < spheres.length; i++) {
+                for (let j = i + 1; j < spheres.length; j++) {
+                    const dx = spheres[i].x - spheres[j].x;
+                    const dy = spheres[i].y - spheres[j].y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+
+                    if (distance < maxDistance) {
+                        const opacity = 1 - distance / maxDistance;
+                        ctx.strokeStyle = `rgba(255, 255, 255, ${opacity})`;
+                        ctx.beginPath();
+                        ctx.moveTo(spheres[i].x, spheres[i].y);
+                        ctx.lineTo(spheres[j].x, spheres[j].y);
+                        ctx.stroke();
+                    }
+                }
+            }
+        }
+
+        // Animation loop
+        function animate() {
+            ctx.clearRect(0, 0, width, height);
+
+            for (const sphere of spheres) {
+                sphere.update();
+                sphere.draw();
+            }
+
+            drawLines();
+
+            requestAnimationFrame(animate);
+        }
+
+        animate();
+    </script>
+
 </body>
 </html>
