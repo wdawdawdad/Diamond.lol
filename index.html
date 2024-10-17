@@ -53,6 +53,12 @@
             margin-bottom: 20px;
         }
 
+        /* Button Container Aligned Right */
+        #packageListContainer {
+            text-align: right; /* Aligns the buttons to the right */
+            padding-right: 50px; /* Adds space from the right edge */
+        }
+
         /* Button Styling */
         a {
             color: #1E90FF; /* Darker blue */
@@ -113,16 +119,18 @@
 
     <section id="packages">
         <h2>Available Packages</h2>
-        <ul id="packageList">
-            <li><a href="https://modsfire.com/6XYPl6r054u0TDG" target="_blank">Horror System</a> - A package for creating immersive horror experiences.</li>
-            <li><a href="https://modsfire.com/SMr6E9TDNyfD0Vf" target="_blank">Humanoid Basics</a> - Humanoid Basics is the perfect solution for creating any third-person game.</li>
-            <li><a href="#" target="_blank">Package 2</a> - Description of Package 2</li>
-            <li><a href="#" target="_blank">Package 3</a> - Description of Package 3</li>
-            <li><a href="#" target="_blank">Package 4</a> - Description of Package 4</li>
-            <li><a href="#" target="_blank">Package 5</a> - Description of Package 5</li>
-            <li><a href="#" target="_blank">Package 6</a> - Description of Package 6</li>
-            <li><a href="#" target="_blank">Package 7</a> - Description of Package 7</li>
-        </ul>
+        <div id="packageListContainer">
+            <ul id="packageList">
+                <li><a href="https://modsfire.com/6XYPl6r054u0TDG" target="_blank">Horror System</a> - A package for creating immersive horror experiences.</li>
+                <li><a href="https://modsfire.com/SMr6E9TDNyfD0Vf" target="_blank">Humanoid Basics</a> - Humanoid Basics is the perfect solution for creating any third-person game.</li>
+                <li><a href="#" target="_blank">Package 2</a> - Description of Package 2</li>
+                <li><a href="#" target="_blank">Package 3</a> - Description of Package 3</li>
+                <li><a href="#" target="_blank">Package 4</a> - Description of Package 4</li>
+                <li><a href="#" target="_blank">Package 5</a> - Description of Package 5</li>
+                <li><a href="#" target="_blank">Package 6</a> - Description of Package 6</li>
+                <li><a href="#" target="_blank">Package 7</a> - Description of Package 7</li>
+            </ul>
+        </div>
     </section>
 
     <canvas id="floatingSpheres"></canvas>
