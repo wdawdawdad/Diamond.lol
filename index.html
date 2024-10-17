@@ -46,6 +46,7 @@
 
         ul {
             list-style-type: none;
+            padding: 0;
         }
 
         li {
@@ -64,7 +65,7 @@
             transition: background-color 0.3s ease, color 0.3s ease;
             display: inline-block;
             text-align: center;
-            min-width: 250px; /* Set a minimum width to make buttons uniform */
+            width: 250px; /* Set a fixed width to align buttons */
             box-sizing: border-box;
         }
 
@@ -80,6 +81,7 @@
             position: fixed;
             width: 100%;
             bottom: 0;
+            display: none; /* Hide the footer */
         }
 
         /* Search bar styling */
@@ -122,10 +124,6 @@
             <li><a href="#" target="_blank">Package 7</a> - Description of Package 7</li>
         </ul>
     </section>
-
-    <footer>
-        <p>&copy; 2024 Unity Asset Collection</p>
-    </footer>
 
     <canvas id="floatingSpheres"></canvas>
 
