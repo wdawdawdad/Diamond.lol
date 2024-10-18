@@ -8,8 +8,9 @@
         body, html {
             margin: 0;
             padding: 0;
-            overflow: hidden;
             font-family: Arial, sans-serif;
+            height: 100%; /* Ensure the body is full height */
+            overflow-y: auto; /* Enable vertical scrolling */
         }
 
         /* Background */
@@ -77,16 +78,6 @@
         a:hover {
             background-color: #1E90FF; /* Solid dark blue when hovered */
             color: white; /* White text on hover */
-        }
-
-        footer {
-            text-align: center;
-            padding: 20px;
-            color: white;
-            position: fixed;
-            width: 100%;
-            bottom: 0;
-            display: none; /* Hide the footer */
         }
 
         /* Search bar styling */
