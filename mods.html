@@ -13,7 +13,7 @@
             font-family: Arial, sans-serif;
             height: 100%; /* Ensure the body is full height */
             overflow-y: auto; /* Enable vertical scrolling */
-            background: linear-gradient(to bottom, black, orange); /* Black to orange gradient */
+            background: linear-gradient(to bottom, red, orange 50%); /* Red to orange gradient meeting more in the middle */
             color: white; /* Set text color to white */
         }
 
@@ -42,7 +42,7 @@
 
     <header>
         <h1>Blank Page</h1>
-        <p>This is a blank page with a black and orange background.</p>
+        <p>This is a blank page with a red and orange background.</p>
     </header>
 
     <canvas id="floatingSpheres"></canvas>
@@ -107,7 +107,7 @@
                     const distance = Math.sqrt(dx * dx + dy * dy);
 
                     if (distance < maxDistance) {
-                        ctx.strokeStyle = 'rgba(255, 255, 255, ' + (1 - distance / maxDistance) + ')';
+                        ctx.strokeStyle = `rgba(255, 255, 255, ${1 - distance / maxDistance})`;
                         ctx.lineWidth = 0.5;
                         ctx.beginPath();
                         ctx.moveTo(spheres[i].x, spheres[i].y);
