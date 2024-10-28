@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>d1amond.mod</title>
     <style>
+        /* General Page Styling */
         body {
             margin: 0;
             display: flex;
@@ -25,11 +26,18 @@
             font-size: 0.5em;
             color: lightgray;
         }
+
+        /* Icons Section */
+        .icons-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 40px;
+        }
         .icons {
             display: flex;
             justify-content: center;
             gap: 50px;
-            margin-top: 40px;
         }
         .icon {
             cursor: pointer;
@@ -40,6 +48,8 @@
             width: 100px;
             height: 100px;
         }
+
+        /* Modals */
         .modal {
             display: none;
             position: fixed;
@@ -70,6 +80,8 @@
             margin-top: 20px;
             font-size: 1.2em;
         }
+
+        /* Overlay */
         .overlay {
             display: none;
             position: fixed;
@@ -84,50 +96,56 @@
     </style>
 </head>
 <body>
-    <div>
+    <header>
         <h1>d1amond.mod <small>Beta</small></h1>
-    </div>
-    <div class="icons">
-        <div class="icon" onclick="openModal('mod1')">
-            <img src="https://via.placeholder.com/100" alt="Mod 1">
-            <p>Mod 1</p>
-        </div>
-        <div class="icon" onclick="openModal('mod2')">
-            <img src="https://via.placeholder.com/100" alt="Mod 2">
-            <p>Mod 2</p>
-        </div>
-        <div class="icon" onclick="openModal('mod3')">
-            <img src="https://via.placeholder.com/100" alt="Mod 3">
-            <p>Mod 3</p>
-        </div>
-    </div>
-    <canvas id="bgCanvas"></canvas>
-    
-    <!-- Overlay -->
-    <div id="overlay" class="overlay" onclick="closeAllModals()"></div>
+    </header>
 
-    <!-- Modals -->
-    <div id="mod1" class="modal">
-        <h2>Mod 1</h2>
-        <p>This is a brief description of Mod 1.</p>
-        <img src="https://via.placeholder.com/150" alt="Mod 1 Image 1">
-        <img src="https://via.placeholder.com/150" alt="Mod 1 Image 2">
-        <button class="close-btn" onclick="closeModal('mod1')">Close</button>
-    </div>
-    <div id="mod2" class="modal">
-        <h2>Mod 2</h2>
-        <p>This is a brief description of Mod 2.</p>
-        <img src="https://via.placeholder.com/150" alt="Mod 2 Image 1">
-        <img src="https://via.placeholder.com/150" alt="Mod 2 Image 2">
-        <button class="close-btn" onclick="closeModal('mod2')">Close</button>
-    </div>
-    <div id="mod3" class="modal">
-        <h2>Mod 3</h2>
-        <p>This is a brief description of Mod 3.</p>
-        <img src="https://via.placeholder.com/150" alt="Mod 3 Image 1">
-        <img src="https://via.placeholder.com/150" alt="Mod 3 Image 2">
-        <button class="close-btn" onclick="closeModal('mod3')">Close</button>
-    </div>
+    <!-- Icons and Modals Section -->
+    <section class="icons-section">
+        <!-- Mod Icons -->
+        <div class="icons">
+            <div class="icon" onclick="openModal('mod1')">
+                <img src="https://i.ytimg.com/vi/jiCoyUmoENQ/hqdefault.jpg" alt="Mod 1">
+                <p>SniperKiller</p>
+            </div>
+            <div class="icon" onclick="openModal('mod2')">
+                <img src="https://via.placeholder.com/100" alt="Mod 2">
+                <p>Mod 2</p>
+            </div>
+            <div class="icon" onclick="openModal('mod3')">
+                <img src="https://via.placeholder.com/100" alt="Mod 3">
+                <p>Mod 3</p>
+            </div>
+        </div>
+
+        <!-- Overlay -->
+        <div id="overlay" class="overlay" onclick="closeAllModals()"></div>
+
+        <!-- Modals -->
+        <div id="mod1" class="modal">
+            <h2>SniperKiller</h2>
+            <p>A free cheat for sniperkiller on steam</p>
+            <img src="https://via.placeholder.com/150" alt="Mod 1 Image 1">
+            <img src="https://via.placeholder.com/150" alt="Mod 1 Image 2">
+            <button class="close-btn" onclick="closeModal('mod1')">Close</button>
+        </div>
+        <div id="mod2" class="modal">
+            <h2>Mod 2</h2>
+            <p>This is a brief description of Mod 2.</p>
+            <img src="https://via.placeholder.com/150" alt="Mod 2 Image 1">
+            <img src="https://via.placeholder.com/150" alt="Mod 2 Image 2">
+            <button class="close-btn" onclick="closeModal('mod2')">Close</button>
+        </div>
+        <div id="mod3" class="modal">
+            <h2>Mod 3</h2>
+            <p>This is a brief description of Mod 3.</p>
+            <img src="https://via.placeholder.com/150" alt="Mod 3 Image 1">
+            <img src="https://via.placeholder.com/150" alt="Mod 3 Image 2">
+            <button class="close-btn" onclick="closeModal('mod3')">Close</button>
+        </div>
+    </section>
+
+    <canvas id="bgCanvas"></canvas>
 
     <script>
         const canvas = document.getElementById('bgCanvas');
