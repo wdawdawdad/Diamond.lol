@@ -1,2 +1,14 @@
 # Diamond.lol
-diamond.lol website thing
+this is a fun little side project i starteed in late 2024 and over the years have been adding stuff onto it :) the source code is public for anyone who wants to check if my website grabs your ip etc
+
+English: YOUR ARE NOT ALLOWED TO USE ANY OF THE CODE IN YOUR OWN WEBSITE NOR COPY IT IF DONE IT WILL RESULT IN A LAW SUIT
+
+French: VOUS N'ÊTES PAS AUTORISÉ À UTILISER L'UNE DES PARTIES DU CODE SUR VOTRE PROPRE SITE WEB NI À LE COPIER. SI VOUS LE FAITES, CELA RÉSULTERA EN UN PROCÈS.
+
+Spanish: NO ESTÁ PERMITIDO USAR NINGÚN CÓDIGO EN SU PROPIO SITIO WEB NI COPIARLO. SI LO HACE, RESULTARÁ EN UNA DEMANDA.
+
+German: SIE DÜRFEN KEINEN DER CODE AUF IHRER EIGENEN WEBSITE VERWENDEN ODER KOPIEREN. WENN SIE DAS TUN, WIRD ES IN EINER KLAGE ENDEN.
+
+Japanese: あなたは自分のウェブサイトでコードを使用することやコピーすることは許可されていません。そうした場合は訴訟になります。
+
+Italian: NON SEI AUTORIZZATO A UTILIZZARE ALCUN CODICE NEL TUO SITO WEB NÉ A COPIARLO. SE LO FARAI, SARAI CITATO IN GIUDIZIO.
