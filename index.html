@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Unity Asset Collection</title>
-        <link rel="icon" href="websiteicon.png" type="image/png">
+    <link rel="icon" href="websiteicon.png" type="image/png">
 
     <script data-cfasync="false" src="//dcbbwymp1bhlf.cloudfront.net/?wbbcd=1110966"></script>
 
@@ -98,12 +98,21 @@
             border-radius: 5px;
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
         }
+
+        /* Button Container Styling */
+        #buttonContainer {
+            margin: 20px 0; /* Margin for spacing */
+        }
     </style>
 </head>
 <body>
 
     <header>
         <h1>Unity Asset Collection</h1>
+        <div id="buttonContainer">
+            <a href="your_unity_packages_url_here" target="_blank">Unity Packages</a>
+            <a href="your_mods_url_here" target="_blank">Mods</a>
+        </div>
     </header>
 
     <section id="home">
@@ -117,29 +126,28 @@
         <input type="text" id="searchBar" placeholder="Search for assets..." onkeyup="searchAssets()">
     </section>
 
-<section id="packages">
-    <h2>Available Packages</h2>
-    <div id="packageListContainer">
-        <ul id="packageList">
-            <li><a href="https://modsfire.com/6XYPl6r054u0TDG" target="_blank">Horror System</a></li>
-            <li><a href="https://modsfire.com/SMr6E9TDNyfD0Vf" target="_blank">Humanoid Basics</a></li>
-            <li><a href="https://modsfire.com/7UtVlpJn3F6l4py" target="_blank">Obfuscator</a></li>
-            <li><a href="https://modsfire.com/c6gpI1B45O7841d" target="_blank">Realistic Car Controller</a></li>
-            <li><a href="https://modsfire.com/tO0oOf8k3D3L3zj" target="_blank">Physics Based Character Controller</a></li>
-            <li><a href="https://modsfire.com/g2XF4oNv9yG8GHp" target="_blank">VR FPS System</a></li>
-            <li><a href="https://modsfire.com/MD9i79g0qgFfvQy" target="_blank">Prefab World Builder</a></li>
-            <li><a href="https://modsfire.com/4m8Jh8Nkt4fHp73" target="_blank">Arcade Car Controller</a></li>
-            <li><a href="https://modsfire.com/54fzdp635JR2I4G" target="_blank">River Valley</a></li>
-            <li><a href="https://modsfire.com/Kqp9Y0vvueT5tnb" target="_blank">Leaning Animator</a></li>
-            <li><a href="https://modsfire.com/66c7h2yYZgiRize" target="_blank">Stylized VFX</a></li>
-            <li><a href="https://modsfire.com/O6JPWUup5p58gCc" target="_blank">Pixel Perfect Fog Of War</a></li>
-            <li><a href="https://modsfire.com/1mNrmm87U66V8CN" target="_blank">Easy Build System</a></li>
-            <li><a href="https://modsfire.com/11NXd9uX9TW9Ut4" target="_blank">Fire & Smoke – Dynamic Nature</a></li>
-            <li><a href="https://modsfire.com/6788Pa4bAmXw77Y" target="_blank">Altos | Volumetric Clouds</a></li>
-        </ul>
-    </div>
-</section>
-
+    <section id="packages">
+        <h2>Available Packages</h2>
+        <div id="packageListContainer">
+            <ul id="packageList">
+                <li><a href="https://modsfire.com/6XYPl6r054u0TDG" target="_blank">Horror System</a></li>
+                <li><a href="https://modsfire.com/SMr6E9TDNyfD0Vf" target="_blank">Humanoid Basics</a></li>
+                <li><a href="https://modsfire.com/7UtVlpJn3F6l4py" target="_blank">Obfuscator</a></li>
+                <li><a href="https://modsfire.com/c6gpI1B45O7841d" target="_blank">Realistic Car Controller</a></li>
+                <li><a href="https://modsfire.com/tO0oOf8k3D3L3zj" target="_blank">Physics Based Character Controller</a></li>
+                <li><a href="https://modsfire.com/g2XF4oNv9yG8GHp" target="_blank">VR FPS System</a></li>
+                <li><a href="https://modsfire.com/MD9i79g0qgFfvQy" target="_blank">Prefab World Builder</a></li>
+                <li><a href="https://modsfire.com/4m8Jh8Nkt4fHp73" target="_blank">Arcade Car Controller</a></li>
+                <li><a href="https://modsfire.com/54fzdp635JR2I4G" target="_blank">River Valley</a></li>
+                <li><a href="https://modsfire.com/Kqp9Y0vvueT5tnb" target="_blank">Leaning Animator</a></li>
+                <li><a href="https://modsfire.com/66c7h2yYZgiRize" target="_blank">Stylized VFX</a></li>
+                <li><a href="https://modsfire.com/O6JPWUup5p58gCc" target="_blank">Pixel Perfect Fog Of War</a></li>
+                <li><a href="https://modsfire.com/1mNrmm87U66V8CN" target="_blank">Easy Build System</a></li>
+                <li><a href="https://modsfire.com/11NXd9uX9TW9Ut4" target="_blank">Fire & Smoke – Dynamic Nature</a></li>
+                <li><a href="https://modsfire.com/6788Pa4bAmXw77Y" target="_blank">Altos | Volumetric Clouds</a></li>
+            </ul>
+        </div>
+    </section>
 
     <canvas id="floatingSpheres"></canvas>
 
@@ -203,8 +211,8 @@
                     const distance = Math.sqrt(dx * dx + dy * dy);
 
                     if (distance < maxDistance) {
-                        const opacity = 1 - distance / maxDistance;
-                        ctx.strokeStyle = `rgba(255, 255, 255, ${opacity})`;
+                        ctx.strokeStyle = 'rgba(255, 255, 255, ' + (1 - distance / maxDistance) + ')';
+                        ctx.lineWidth = 0.5;
                         ctx.beginPath();
                         ctx.moveTo(spheres[i].x, spheres[i].y);
                         ctx.lineTo(spheres[j].x, spheres[j].y);
@@ -217,34 +225,15 @@
         // Animation loop
         function animate() {
             ctx.clearRect(0, 0, width, height);
-
             for (const sphere of spheres) {
                 sphere.update();
                 sphere.draw();
             }
-
             drawLines();
-
             requestAnimationFrame(animate);
         }
 
         animate();
-
-        // Search function for assets
-        function searchAssets() {
-            const input = document.getElementById('searchBar').value.toLowerCase();
-            const listItems = document.querySelectorAll('#packageList li');
-
-            listItems.forEach(function(item) {
-                const text = item.textContent.toLowerCase();
-                if (text.includes(input)) {
-                    item.style.display = 'block'; // Show matching items
-                } else {
-                    item.style.display = 'none'; // Hide non-matching items
-                }
-            });
-        }
     </script>
-
 </body>
 </html>
