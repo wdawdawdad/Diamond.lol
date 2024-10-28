@@ -8,8 +8,9 @@
         body {
             margin: 0;
             display: flex;
-            justify-content: center;
+            flex-direction: column;
             align-items: center;
+            justify-content: center;
             height: 100vh;
             background: linear-gradient(45deg, red, black);
             overflow: hidden;
@@ -24,12 +25,46 @@
             font-size: 0.5em;
             color: lightgray;
         }
-        canvas {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+        .icons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .icon {
+            cursor: pointer;
+            text-align: center;
+        }
+        .icon img {
+            width: 50px;
+            height: 50px;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 60%;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            color: white;
+            text-align: center;
+        }
+        .modal img {
+            width: 100px;
+            height: 100px;
+            margin: 10px;
+        }
+        .close-btn {
+            background: red;
+            border: none;
+            color: white;
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-top: 20px;
         }
     </style>
 </head>
@@ -37,7 +72,45 @@
     <div>
         <h1>d1amond.mod <small>Beta</small></h1>
     </div>
+    <div class="icons">
+        <div class="icon" onclick="openModal('mod1')">
+            <img src="icon1.png" alt="Mod 1">
+            <p>Mod 1</p>
+        </div>
+        <div class="icon" onclick="openModal('mod2')">
+            <img src="icon2.png" alt="Mod 2">
+            <p>Mod 2</p>
+        </div>
+        <div class="icon" onclick="openModal('mod3')">
+            <img src="icon3.png" alt="Mod 3">
+            <p>Mod 3</p>
+        </div>
+    </div>
     <canvas id="bgCanvas"></canvas>
+    
+    <!-- Modals -->
+    <div id="mod1" class="modal">
+        <h2>Mod 1</h2>
+        <p>This is a brief description of Mod 1.</p>
+        <img src="mod1-img1.png" alt="Mod 1 Image 1">
+        <img src="mod1-img2.png" alt="Mod 1 Image 2">
+        <button class="close-btn" onclick="closeModal('mod1')">Close</button>
+    </div>
+    <div id="mod2" class="modal">
+        <h2>Mod 2</h2>
+        <p>This is a brief description of Mod 2.</p>
+        <img src="mod2-img1.png" alt="Mod 2 Image 1">
+        <img src="mod2-img2.png" alt="Mod 2 Image 2">
+        <button class="close-btn" onclick="closeModal('mod2')">Close</button>
+    </div>
+    <div id="mod3" class="modal">
+        <h2>Mod 3</h2>
+        <p>This is a brief description of Mod 3.</p>
+        <img src="mod3-img1.png" alt="Mod 3 Image 1">
+        <img src="mod3-img2.png" alt="Mod 3 Image 2">
+        <button class="close-btn" onclick="closeModal('mod3')">Close</button>
+    </div>
+
     <script>
         const canvas = document.getElementById('bgCanvas');
         const ctx = canvas.getContext('2d');
@@ -113,6 +186,14 @@
             }
             connect();
             requestAnimationFrame(animate);
+        }
+
+        function openModal(id) {
+            document.getElementById(id).style.display = 'block';
+        }
+
+        function closeModal(id) {
+            document.getElementById(id).style.display = 'none';
         }
 
         window.addEventListener('resize', function() {
