@@ -3,251 +3,98 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>d1amond.mod</title>
+    <title>Product Store</title>
     <style>
-        /* General Page Styling */
+        /* General Styling */
         body {
-            margin: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            background: linear-gradient(45deg, red, black);
-            overflow: hidden;
-            color: white;
             font-family: Arial, sans-serif;
-        }
-        h1 {
-            font-size: 4em;
             margin: 0;
         }
-        small {
-            font-size: 0.5em;
-            color: lightgray;
-        }
-
-        /* Icons Section */
-        .icons-section {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin-top: 40px;
-        }
-        .icons {
-            display: flex;
-            justify-content: center;
-            gap: 100px; /* Increased gap between icons */
-        }
-        .icon {
-            cursor: pointer;
+        .banner {
+            background-color: #333;
+            color: #fff;
             text-align: center;
-            font-size: 1.5em;
+            padding: 10px;
         }
-        .icon img {
-            width: 150px; /* Increased width for larger icons */
-            height: 150px; /* Increased height for larger icons */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            padding: 20px;
+        }
+        .product {
+            background-color: #f1f1f1;
+            text-align: center;
+            padding: 15px;
+            border-radius: 8px;
+            cursor: pointer;
         }
 
-        /* Modals */
+        /* Modal Styling */
         .modal {
             display: none;
             position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 60%;
-            background: rgba(0, 0, 0, 0.9);
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+        }
+        .modal-content {
+            background-color: #fff;
+            margin: 15% auto;
             padding: 20px;
-            border-radius: 10px;
-            color: white;
-            text-align: center;
-            z-index: 10;
-            backdrop-filter: blur(8px);
+            width: 80%;
+            border-radius: 8px;
         }
-        .modal img {
-            width: 150px;
-            height: 150px;
-            margin: 10px;
-        }
-        .close-btn {
-            background: red;
-            border: none;
-            color: white;
-            padding: 15px;
+        .close {
+            position: absolute;
+            top: 10px; right: 10px;
+            font-size: 24px;
             cursor: pointer;
-            border-radius: 5px;
-            margin-top: 20px;
-            font-size: 1.2em;
-        }
-
-        /* Overlay */
-        .overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.6);
-            backdrop-filter: blur(10px);
-            z-index: 5;
         }
     </style>
 </head>
 <body>
-    <header>
-        <h1>d1amond.mod <small>Beta</small></h1>
+    <!-- Top Banner -->
+    <header class="banner">
+        <h1>Store Name</h1>
+        <nav>
+            <a href="#products">Products</a>
+            <a href="#about">About</a>
+            <a href="#contact">Contact</a>
+        </nav>
     </header>
 
-    <!-- Icons and Modals Section -->
-    <section class="icons-section">
-        <!-- Mod Icons -->
-        <div class="icons">
-            <div class="icon" onclick="openModal('mod1')">
-                <img src="https://i.ytimg.com/vi/jiCoyUmoENQ/hqdefault.jpg" alt="Mod 1">
-                <p>SniperKiller</p>
-            </div>
-            <div class="icon" onclick="openModal('mod2')">
-                <img src="https://via.placeholder.com/150" alt="Mod 2">
-                <p>Mod 2</p>
-            </div>
-            <div class="icon" onclick="openModal('mod3')">
-                <img src="https://via.placeholder.com/150" alt="Mod 3">
-                <p>Mod 3</p>
-            </div>
+    <!-- Product Grid -->
+    <section id="products" class="product-grid">
+        <div class="product" onclick="openModal('modal1')">
+            <img src="image1.jpg" alt="Product 1">
+            <h3>Product 1</h3>
+            <p>$20.00</p>
         </div>
-
-        <!-- Overlay -->
-        <div id="overlay" class="overlay" onclick="closeAllModals()"></div>
-
-        <!-- Modals -->
-        <div id="mod1" class="modal">
-            <h2>Mod 1</h2>
-            <p>This is a brief description of Mod 1.</p>
-            <img src="https://via.placeholder.com/150" alt="Mod 1 Image 1">
-            <img src="https://via.placeholder.com/150" alt="Mod 1 Image 2">
-            <button class="close-btn" onclick="closeModal('mod1')">Close</button>
-        </div>
-        <div id="mod2" class="modal">
-            <h2>Mod 2</h2>
-            <p>This is a brief description of Mod 2.</p>
-            <img src="https://via.placeholder.com/150" alt="Mod 2 Image 1">
-            <img src="https://via.placeholder.com/150" alt="Mod 2 Image 2">
-            <button class="close-btn" onclick="closeModal('mod2')">Close</button>
-        </div>
-        <div id="mod3" class="modal">
-            <h2>Mod 3</h2>
-            <p>This is a brief description of Mod 3.</p>
-            <img src="https://via.placeholder.com/150" alt="Mod 3 Image 1">
-            <img src="https://via.placeholder.com/150" alt="Mod 3 Image 2">
-            <button class="close-btn" onclick="closeModal('mod3')">Close</button>
+        <div class="product" onclick="openModal('modal2')">
+            <img src="image2.jpg" alt="Product 2">
+            <h3>Product 2</h3>
+            <p>$25.00</p>
         </div>
     </section>
 
-    <canvas id="bgCanvas"></canvas>
+    <!-- Modal Structure -->
+    <div id="modal1" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('modal1')">&times;</span>
+            <h2>Product 1 Details</h2>
+            <p>Description and other details for Product 1.</p>
+        </div>
+    </div>
 
     <script>
-        const canvas = document.getElementById('bgCanvas');
-        const ctx = canvas.getContext('2d');
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-
-        let particlesArray = [];
-        const numParticles = 50;
-
-        class Particle {
-            constructor(x, y, size, speedX, speedY) {
-                this.x = x;
-                this.y = y;
-                this.size = size;
-                this.speedX = speedX;
-                this.speedY = speedY;
-            }
-            update() {
-                this.x += this.speedX;
-                this.y += this.speedY;
-
-                if (this.x + this.size > canvas.width || this.x - this.size < 0) {
-                    this.speedX = -this.speedX;
-                }
-                if (this.y + this.size > canvas.height || this.y - this.size < 0) {
-                    this.speedY = -this.speedY;
-                }
-            }
-            draw() {
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2, false);
-                ctx.fillStyle = 'white';
-                ctx.fill();
-            }
+        function openModal(modalId) {
+            document.getElementById(modalId).style.display = 'block';
         }
 
-        function init() {
-            particlesArray = [];
-            for (let i = 0; i < numParticles; i++) {
-                let size = Math.random() * 5 + 1;
-                let x = Math.random() * (canvas.width - size * 2) + size;
-                let y = Math.random() * (canvas.height - size * 2) + size;
-                let speedX = Math.random() * 1 - 0.5;
-                let speedY = Math.random() * 1 - 0.5;
-                particlesArray.push(new Particle(x, y, size, speedX, speedY));
-            }
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
         }
-
-        function connect() {
-            for (let a = 0; a < particlesArray.length; a++) {
-                for (let b = a; b < particlesArray.length; b++) {
-                    let dx = particlesArray[a].x - particlesArray[b].x;
-                    let dy = particlesArray[a].y - particlesArray[b].y;
-                    let distance = Math.sqrt(dx * dx + dy * dy);
-
-                    if (distance < 100) {
-                        ctx.strokeStyle = 'white';
-                        ctx.lineWidth = 0.2;
-                        ctx.beginPath();
-                        ctx.moveTo(particlesArray[a].x, particlesArray[a].y);
-                        ctx.lineTo(particlesArray[b].x, particlesArray[b].y);
-                        ctx.stroke();
-                    }
-                }
-            }
-        }
-
-        function animate() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            for (let i = 0; i < particlesArray.length; i++) {
-                particlesArray[i].update();
-                particlesArray[i].draw();
-            }
-            connect();
-            requestAnimationFrame(animate);
-        }
-
-        function openModal(id) {
-            document.getElementById(id).style.display = 'block';
-            document.getElementById('overlay').style.display = 'block';
-        }
-
-        function closeModal(id) {
-            document.getElementById(id).style.display = 'none';
-            document.getElementById('overlay').style.display = 'none';
-        }
-
-        function closeAllModals() {
-            const modals = document.querySelectorAll('.modal');
-            modals.forEach(modal => modal.style.display = 'none');
-            document.getElementById('overlay').style.display = 'none';
-        }
-
-        window.addEventListener('resize', function() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-            init();
-        });
-
-        init();
-        animate();
     </script>
 </body>
 </html>
