@@ -37,7 +37,7 @@
         .icons {
             display: flex;
             justify-content: center;
-            gap: 50px;
+            gap: 100px; /* Increased gap between icons */
         }
         .icon {
             cursor: pointer;
@@ -45,8 +45,8 @@
             font-size: 1.5em;
         }
         .icon img {
-            width: 100px;
-            height: 100px;
+            width: 150px; /* Increased width for larger icons */
+            height: 150px; /* Increased height for larger icons */
         }
 
         /* Modals */
@@ -105,15 +105,15 @@
         <!-- Mod Icons -->
         <div class="icons">
             <div class="icon" onclick="openModal('mod1')">
-                <img src="https://i.ytimg.com/vi/jiCoyUmoENQ/hqdefault.jpg" alt="Mod 1">
-                <p>SniperKiller</p>
+                <img src="https://via.placeholder.com/150" alt="Mod 1">
+                <p>Mod 1</p>
             </div>
             <div class="icon" onclick="openModal('mod2')">
-                <img src="https://via.placeholder.com/100" alt="Mod 2">
+                <img src="https://via.placeholder.com/150" alt="Mod 2">
                 <p>Mod 2</p>
             </div>
             <div class="icon" onclick="openModal('mod3')">
-                <img src="https://via.placeholder.com/100" alt="Mod 3">
+                <img src="https://via.placeholder.com/150" alt="Mod 3">
                 <p>Mod 3</p>
             </div>
         </div>
@@ -123,8 +123,8 @@
 
         <!-- Modals -->
         <div id="mod1" class="modal">
-            <h2>SniperKiller</h2>
-            <p>A free cheat for sniperkiller on steam</p>
+            <h2>Mod 1</h2>
+            <p>This is a brief description of Mod 1.</p>
             <img src="https://via.placeholder.com/150" alt="Mod 1 Image 1">
             <img src="https://via.placeholder.com/150" alt="Mod 1 Image 2">
             <button class="close-btn" onclick="closeModal('mod1')">Close</button>
