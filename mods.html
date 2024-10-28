@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blank Page</title>
+    <title>Floating Spheres Animation</title>
     <link rel="icon" href="websiteicon.png" type="image/png">
 
     <style>
@@ -12,9 +12,8 @@
             padding: 0;
             font-family: Arial, sans-serif;
             height: 100%; /* Ensure the body is full height */
-            overflow-y: auto; /* Enable vertical scrolling */
+            overflow: hidden; /* Hide overflow */
             background: linear-gradient(to bottom, red, orange 50%); /* Red to orange gradient meeting more in the middle */
-            color: white; /* Set text color to white */
         }
 
         /* Floating Canvas for Spheres */
@@ -41,8 +40,8 @@
 <body>
 
     <header>
-        <h1>Blank Page</h1>
-        <p>This is a blank page with a red and orange background.</p>
+        <h1>Floating Spheres</h1>
+        <p>This page features small floating spheres that connect with lines when close.</p>
     </header>
 
     <canvas id="floatingSpheres"></canvas>
@@ -54,8 +53,8 @@
 
         let width, height;
         const spheres = [];
-        const sphereCount = 50;
-        const maxDistance = 150;
+        const sphereCount = 50; // Total number of spheres
+        const maxDistance = 100; // Maximum distance to connect lines
 
         // Resize canvas to fit window
         function resizeCanvas() {
@@ -71,15 +70,15 @@
             constructor(x, y) {
                 this.x = x;
                 this.y = y;
-                this.vx = (Math.random() - 0.5) * 1.5;
-                this.vy = (Math.random() - 0.5) * 1.5;
-                this.radius = 2;
+                this.vx = (Math.random() - 0.5) * 2; // Random horizontal velocity
+                this.vy = (Math.random() - 0.5) * 2; // Random vertical velocity
+                this.radius = 5; // Small radius for the spheres
             }
 
             draw() {
                 ctx.beginPath();
                 ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-                ctx.fillStyle = 'white';
+                ctx.fillStyle = 'white'; // Color of the spheres
                 ctx.fill();
             }
 
@@ -87,6 +86,7 @@
                 this.x += this.vx;
                 this.y += this.vy;
 
+                // Bounce off walls
                 if (this.x < 0 || this.x > width) this.vx = -this.vx;
                 if (this.y < 0 || this.y > height) this.vy = -this.vy;
             }
@@ -106,6 +106,7 @@
                     const dy = spheres[i].y - spheres[j].y;
                     const distance = Math.sqrt(dx * dx + dy * dy);
 
+                    // Draw line if distance is less than maxDistance
                     if (distance < maxDistance) {
                         ctx.strokeStyle = `rgba(255, 255, 255, ${1 - distance / maxDistance})`;
                         ctx.lineWidth = 0.5;
@@ -120,13 +121,16 @@
 
         // Animation loop
         function animate() {
-            ctx.clearRect(0, 0, width, height);
+            ctx.clearRect(0, 0, width, height); // Clear the canvas
+
             for (const sphere of spheres) {
-                sphere.update();
-                sphere.draw();
+                sphere.update(); // Update sphere position
+                sphere.draw();   // Draw the sphere
             }
-            drawLines();
-            requestAnimationFrame(animate);
+
+            drawLines(); // Draw connecting lines
+
+            requestAnimationFrame(animate); // Repeat the animation
         }
 
         animate();
