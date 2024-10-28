@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blank Page</title>
+    <link rel="icon" href="websiteicon.png" type="image/png">
+
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            height: 100%; /* Ensure the body is full height */
+            overflow-y: auto; /* Enable vertical scrolling */
+            background: linear-gradient(to bottom, black, orange); /* Black to orange gradient */
+            color: white; /* Set text color to white */
+        }
+
+        /* Floating Canvas for Spheres */
+        canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: -1;
+        }
+
+        /* Main Content */
+        header {
+            text-align: center;
+            padding: 50px;
+            color: white;
+        }
+
+        section {
+            text-align: center;
+            padding: 30px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Blank Page</h1>
+        <p>This is a blank page with a black and orange background.</p>
+    </header>
+
+    <canvas id="floatingSpheres"></canvas>
+
+    <script>
+        // Sphere and Line Animation
+        const canvas = document.getElementById('floatingSpheres');
+        const ctx = canvas.getContext('2d');
+
+        let width, height;
+        const spheres = [];
+        const sphereCount = 50;
+        const maxDistance = 150;
+
+        // Resize canvas to fit window
+        function resizeCanvas() {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+        }
+
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        // Create spheres
+        class Sphere {
+            constructor(x, y) {
+                this.x = x;
+                this.y = y;
+                this.vx = (Math.random() - 0.5) * 1.5;
+                this.vy = (Math.random() - 0.5) * 1.5;
+                this.radius = 2;
+            }
+
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                ctx.fillStyle = 'white';
+                ctx.fill();
+            }
+
+            update() {
+                this.x += this.vx;
+                this.y += this.vy;
+
+                if (this.x < 0 || this.x > width) this.vx = -this.vx;
+                if (this.y < 0 || this.y > height) this.vy = -this.vy;
+            }
+        }
+
+        // Create initial spheres
+        for (let i = 0; i < sphereCount; i++) {
+            const sphere = new Sphere(Math.random() * width, Math.random() * height);
+            spheres.push(sphere);
+        }
+
+        // Draw connecting lines
+        function drawLines() {
+            for (let i = 0; i < spheres.length; i++) {
+                for (let j = i + 1; j < spheres.length; j++) {
+                    const dx = spheres[i].x - spheres[j].x;
+                    const dy = spheres[i].y - spheres[j].y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+
+                    if (distance < maxDistance) {
+                        ctx.strokeStyle = 'rgba(255, 255, 255, ' + (1 - distance / maxDistance) + ')';
+                        ctx.lineWidth = 0.5;
+                        ctx.beginPath();
+                        ctx.moveTo(spheres[i].x, spheres[i].y);
+                        ctx.lineTo(spheres[j].x, spheres[j].y);
+                        ctx.stroke();
+                    }
+                }
+            }
+        }
+
+        // Animation loop
+        function animate() {
+            ctx.clearRect(0, 0, width, height);
+            for (const sphere of spheres) {
+                sphere.update();
+                sphere.draw();
+            }
+            drawLines();
+            requestAnimationFrame(animate);
+        }
+
+        animate();
+    </script>
+</body>
+</html>
