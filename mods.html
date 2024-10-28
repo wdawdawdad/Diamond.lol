@@ -3,136 +3,125 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Floating Spheres Animation</title>
-    <link rel="icon" href="websiteicon.png" type="image/png">
-
+    <title>d1amond.mod</title>
     <style>
-        body, html {
+        body {
             margin: 0;
-            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(45deg, red, black);
+            overflow: hidden;
+            color: white;
             font-family: Arial, sans-serif;
-            height: 100%; /* Ensure the body is full height */
-            overflow: hidden; /* Hide overflow */
-            background: linear-gradient(to bottom, red, orange 50%); /* Red to orange gradient meeting more in the middle */
         }
-
-        /* Floating Canvas for Spheres */
+        h1 {
+            font-size: 4em;
+            margin: 0;
+        }
+        small {
+            font-size: 0.5em;
+            color: lightgray;
+        }
         canvas {
             position: absolute;
             top: 0;
             left: 0;
-            z-index: -1;
-        }
-
-        /* Main Content */
-        header {
-            text-align: center;
-            padding: 50px;
-            color: white;
-        }
-
-        section {
-            text-align: center;
-            padding: 30px;
+            width: 100%;
+            height: 100%;
         }
     </style>
 </head>
 <body>
-
-    <header>
-        <h1>Floating Spheres</h1>
-        <p>This page features small floating spheres that connect with lines when close.</p>
-    </header>
-
-    <canvas id="floatingSpheres"></canvas>
-
+    <div>
+        <h1>d1amond.mod <small>Beta</small></h1>
+    </div>
+    <canvas id="bgCanvas"></canvas>
     <script>
-        // Sphere and Line Animation
-        const canvas = document.getElementById('floatingSpheres');
+        const canvas = document.getElementById('bgCanvas');
         const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        
+        let particlesArray = [];
+        const numParticles = 50;
 
-        let width, height;
-        const spheres = [];
-        const sphereCount = 50; // Total number of spheres
-        const maxDistance = 100; // Maximum distance to connect lines
-
-        // Resize canvas to fit window
-        function resizeCanvas() {
-            width = canvas.width = window.innerWidth;
-            height = canvas.height = window.innerHeight;
-        }
-
-        window.addEventListener('resize', resizeCanvas);
-        resizeCanvas();
-
-        // Create spheres
-        class Sphere {
-            constructor(x, y) {
+        class Particle {
+            constructor(x, y, size, speedX, speedY) {
                 this.x = x;
                 this.y = y;
-                this.vx = (Math.random() - 0.5) * 2; // Random horizontal velocity
-                this.vy = (Math.random() - 0.5) * 2; // Random vertical velocity
-                this.radius = 5; // Small radius for the spheres
+                this.size = size;
+                this.speedX = speedX;
+                this.speedY = speedY;
             }
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
 
+                if (this.x + this.size > canvas.width || this.x - this.size < 0) {
+                    this.speedX = -this.speedX;
+                }
+                if (this.y + this.size > canvas.height || this.y - this.size < 0) {
+                    this.speedY = -this.speedY;
+                }
+            }
             draw() {
                 ctx.beginPath();
-                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-                ctx.fillStyle = 'white'; // Color of the spheres
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2, false);
+                ctx.fillStyle = 'white';
                 ctx.fill();
             }
+        }
 
-            update() {
-                this.x += this.vx;
-                this.y += this.vy;
-
-                // Bounce off walls
-                if (this.x < 0 || this.x > width) this.vx = -this.vx;
-                if (this.y < 0 || this.y > height) this.vy = -this.vy;
+        function init() {
+            particlesArray = [];
+            for (let i = 0; i < numParticles; i++) {
+                let size = Math.random() * 5 + 1;
+                let x = Math.random() * (canvas.width - size * 2) + size;
+                let y = Math.random() * (canvas.height - size * 2) + size;
+                let speedX = Math.random() * 1 - 0.5;
+                let speedY = Math.random() * 1 - 0.5;
+                particlesArray.push(new Particle(x, y, size, speedX, speedY));
             }
         }
 
-        // Create initial spheres
-        for (let i = 0; i < sphereCount; i++) {
-            const sphere = new Sphere(Math.random() * width, Math.random() * height);
-            spheres.push(sphere);
-        }
+        function connect() {
+            for (let a = 0; a < particlesArray.length; a++) {
+                for (let b = a; b < particlesArray.length; b++) {
+                    let dx = particlesArray[a].x - particlesArray[b].x;
+                    let dy = particlesArray[a].y - particlesArray[b].y;
+                    let distance = Math.sqrt(dx * dx + dy * dy);
 
-        // Draw connecting lines
-        function drawLines() {
-            for (let i = 0; i < spheres.length; i++) {
-                for (let j = i + 1; j < spheres.length; j++) {
-                    const dx = spheres[i].x - spheres[j].x;
-                    const dy = spheres[i].y - spheres[j].y;
-                    const distance = Math.sqrt(dx * dx + dy * dy);
-
-                    // Draw line if distance is less than maxDistance
-                    if (distance < maxDistance) {
-                        ctx.strokeStyle = `rgba(255, 255, 255, ${1 - distance / maxDistance})`;
-                        ctx.lineWidth = 0.5;
+                    if (distance < 100) {
+                        ctx.strokeStyle = 'white';
+                        ctx.lineWidth = 0.2;
                         ctx.beginPath();
-                        ctx.moveTo(spheres[i].x, spheres[i].y);
-                        ctx.lineTo(spheres[j].x, spheres[j].y);
+                        ctx.moveTo(particlesArray[a].x, particlesArray[a].y);
+                        ctx.lineTo(particlesArray[b].x, particlesArray[b].y);
                         ctx.stroke();
                     }
                 }
             }
         }
 
-        // Animation loop
         function animate() {
-            ctx.clearRect(0, 0, width, height); // Clear the canvas
-
-            for (const sphere of spheres) {
-                sphere.update(); // Update sphere position
-                sphere.draw();   // Draw the sphere
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            for (let i = 0; i < particlesArray.length; i++) {
+                particlesArray[i].update();
+                particlesArray[i].draw();
             }
-
-            drawLines(); // Draw connecting lines
-
-            requestAnimationFrame(animate); // Repeat the animation
+            connect();
+            requestAnimationFrame(animate);
         }
 
+        window.addEventListener('resize', function() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            init();
+        });
+
+        init();
         animate();
     </script>
 </body>
