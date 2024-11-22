@@ -1,141 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Clerk Authentication Example</title>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap">
-  <style>
-    :root {
-      --primary-orange: #FF7F50;
-      --secondary-orange: #FF6B35;
-      --deep-purple: #4B3F72;
-      --light-purple: #7C739C;
-      --dark-bg: #2A2438;
-    }
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Poppins', sans-serif;
-    }
-
-    body {
-      background-color: var(--dark-bg);
-      color: white;
-    }
-
-    .navbar {
-      background-color: var(--deep-purple);
-      padding: 1rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      position: fixed;
-      width: 100%;
-      top: 0;
-      z-index: 100;
-    }
-
-    .navbar .logo {
-      font-size: 1.5rem;
-      font-weight: bold;
-      color: white;
-    }
-
-    .hero {
-      height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      padding: 2rem;
-      background: linear-gradient(135deg, var(--deep-purple), var(--dark-bg));
-    }
-
-    .hero h1 {
-      font-size: 3.5rem;
-      margin-bottom: 1rem;
-      color: var(--primary-orange);
-    }
-
-    .hero p {
-      font-size: 1.2rem;
-      margin-bottom: 1rem;
-      max-width: 600px;
-      color: #ffffff;
-    }
-
-    .hero .slogan {
-      font-size: 1.5rem;
-      margin-bottom: 1rem;
-      color: var(--primary-orange);
-      font-weight: bold;
-    }
-
-    .hero .sub-slogan {
-      font-size: 1.1rem;
-      margin-bottom: 2rem;
-      color: var(--light-purple);
-    }
-
-    .cta-button {
-      background-color: var(--primary-orange);
-      color: white;
-      padding: 1rem 2rem;
-      border-radius: 25px;
-      text-decoration: none;
-      font-weight: bold;
-      transition: transform 0.3s, box-shadow 0.3s;
-      cursor: pointer;
-    }
-
-    .cta-button:hover {
-      background-color: var(--secondary-orange);
-      transform: translateY(-3px);
-      box-shadow: 0 5px 15px rgba(255, 127, 80, 0.3);
-    }
-
-    #auth-container {
-      margin-top: 20px;
-    }
-  </style>
-  <script type="module">
-    import { Clerk } from "@clerk/clerk-js";
-
-    const clerkPubKey = "pk_test_bW9yYWwtZWxlcGhhbnQtMzAuY2xlcmsuYWNjb3VudHMuZGV2JA"; // Replace with your Clerk key
-    const clerk = new Clerk(••••••••••••••••••••••••••••••••••••••••••••••••••);
-
-    // Load Clerk and set up event listeners
-    window.addEventListener('DOMContentLoaded', async () => {
-      await clerk.load();
-
-      const getStartedButton = document.getElementById('get-started-btn');
-      getStartedButton.addEventListener('click', () => {
-        const authContainer = document.getElementById('auth-container');
-        if (clerk.user) {
-          authContainer.innerHTML = '<div id="user-button"></div>';
-          clerk.mountUserButton(document.getElementById('user-button'));
-        } else {
-          authContainer.innerHTML = '<div id="sign-in"></div>';
-          clerk.mountSignIn(document.getElementById('sign-in'));
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clerk.io Signup Example</title>
+    <script src="https://cdn.clerk.dev/clerk.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
         }
-      });
-    });
-  </script>
+        .container {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 400px;
+        }
+        h2 {
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
-  <nav class="navbar">
-    <div class="logo">MyApp</div>
-  </nav>
+    <div class="container">
+        <h2>Sign Up</h2>
+        <div id="sign-up-container"></div>
+    </div>
 
-  <main class="hero">
-    <h1>Welcome to MyApp</h1>
-    <p>Your journey to awesome begins here. Sign up or log in to explore more.</p>
-    <button id="get-started-btn" class="cta-button">Get Started</button>
-    <div id="auth-container"></div>
-  </main>
+    <script>
+        // Initialize Clerk
+        const clerk = new Clerk({ 
+            frontendApi: "your-frontend-api-key", // Replace with your Clerk Frontend API Key
+        });
+
+        // Add Clerk Sign Up component
+        clerk.load().then(() => {
+            clerk.ui.createSignUp({ element: "#sign-up-container" });
+        });
+    </script>
 </body>
 </html>
