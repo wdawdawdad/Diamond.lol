@@ -3,9 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>D1amond.lol - Premium Bot Hosting</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/npm/@clerk/clerk-js@latest"></script>
+  <title>Clerk Authentication Example</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap">
   <style>
     :root {
       --primary-orange: #FF7F50;
@@ -39,10 +38,10 @@
       z-index: 100;
     }
 
-    .logo {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
+    .navbar .logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: white;
     }
 
     .hero {
@@ -103,49 +102,40 @@
       margin-top: 20px;
     }
   </style>
-</head>
-<body>
-  <!-- Navbar -->
-  <nav class="navbar">
-    <div class="logo">
-      <h1>D1amond.lol</h1>
-    </div>
-  </nav>
+  <script type="module">
+    import { Clerk } from "@clerk/clerk-js";
 
-  <!-- Hero Section -->
-  <section class="hero">
-    <h1>Premium Bot Hosting</h1>
-    <p class="slogan">Effortless, Dependable, and Budget-Friendly.</p>
-    <p class="sub-slogan">Join D1amond and Discover Cloud Hosting, Redefined.</p>
-    <button id="get-started" class="cta-button">Get Started</button>
-    <div id="auth-container"></div>
-  </section>
+    const clerkPubKey = "YOUR_PUBLISHABLE_KEY"; // Replace with your Clerk key
+    const clerk = new Clerk(clerkPubKey);
 
-  <script>
-    document.addEventListener("DOMContentLoaded", async () => {
-      try {
-        const clerkPubKey = "pk_test_bW9yYWwtZWxlcGhhbnQtMzAuY2xlcmsuYWNjb3VudHMuZGV2JA"; // Replace with your Clerk publishable key
-        const clerk = new Clerk(clerkPubKey);
+    // Load Clerk and set up event listeners
+    window.addEventListener('DOMContentLoaded', async () => {
+      await clerk.load();
 
-        await clerk.load(); // Ensure ClerkJS is fully loaded
-
-        const getStartedButton = document.getElementById("get-started");
-        const authContainer = document.getElementById("auth-container");
-
-        // Event listener for "Get Started" button
-        getStartedButton.addEventListener("click", () => {
-          // Clear previous content and mount the sign-in form
-          authContainer.innerHTML = "";
-          authContainer.innerHTML = `<div id="sign-in"></div>`;
-          clerk.mountSignIn(authContainer.firstChild);
-        });
-
-        // Optional: Log user state
-        console.log("Clerk user status:", clerk.user ? "Signed In" : "Not Signed In");
-      } catch (error) {
-        console.error("Error initializing Clerk:", error);
-      }
+      const getStartedButton = document.getElementById('get-started-btn');
+      getStartedButton.addEventListener('click', () => {
+        const authContainer = document.getElementById('auth-container');
+        if (clerk.user) {
+          authContainer.innerHTML = '<div id="user-button"></div>';
+          clerk.mountUserButton(document.getElementById('user-button'));
+        } else {
+          authContainer.innerHTML = '<div id="sign-in"></div>';
+          clerk.mountSignIn(document.getElementById('sign-in'));
+        }
+      });
     });
   </script>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="logo">MyApp</div>
+  </nav>
+
+  <main class="hero">
+    <h1>Welcome to MyApp</h1>
+    <p>Your journey to awesome begins here. Sign up or log in to explore more.</p>
+    <button id="get-started-btn" class="cta-button">Get Started</button>
+    <div id="auth-container"></div>
+  </main>
 </body>
 </html>
