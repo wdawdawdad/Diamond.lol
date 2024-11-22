@@ -28,6 +28,10 @@
         #sign-up-container, #sign-in-container {
             margin-top: 20px;
         }
+        #user-info {
+            display: none;
+            margin-top: 20px;
+        }
     </style>
 </head>
 <body>
@@ -44,34 +48,40 @@
     <script>
         // Initialize Clerk with your Frontend API Key
         const clerk = new Clerk({
-            frontendApi: 'your-clerk-frontend-api-key', // Replace with your Clerk Frontend API Key
+            frontendApi: 'your-clerk-frontend-api-key', // Replace with your actual Clerk Frontend API Key
         });
 
-        // Check if the user is already signed in
+        // Load Clerk UI and check user session status
         clerk.load().then(() => {
             if (clerk.user.isSignedIn()) {
                 showUserInfo();
             } else {
-                showSignUp();
+                showSignUp();  // Show sign-up form if user is not signed in
             }
         });
 
         // Show the Sign Up form
         function showSignUp() {
-            clerk.ui.createSignUp({ element: '#sign-up-container' });
+            clerk.ui.createSignUp({
+                element: '#sign-up-container',
+                afterSignUpUrl: window.location.href  // Redirect user after successful sign-up
+            });
             document.getElementById('sign-in-container').style.display = 'none';
         }
 
         // Show the Sign In form
         function showSignIn() {
-            clerk.ui.createSignIn({ element: '#sign-in-container' });
+            clerk.ui.createSignIn({
+                element: '#sign-in-container',
+                afterSignInUrl: window.location.href  // Redirect user after successful sign-in
+            });
             document.getElementById('sign-up-container').style.display = 'none';
         }
 
         // Show user info if signed in
         function showUserInfo() {
             const user = clerk.user;
-            document.getElementById('user-name').textContent = user.firstName;
+            document.getElementById('user-name').textContent = user.firstName || "User";
             document.getElementById('user-info').style.display = 'block';
             document.getElementById('sign-up-container').style.display = 'none';
             document.getElementById('sign-in-container').style.display = 'none';
@@ -81,7 +91,7 @@
         function signOut() {
             clerk.user.signOut().then(() => {
                 document.getElementById('user-info').style.display = 'none';
-                showSignIn();
+                showSignIn();  // Show sign-in form after sign out
             });
         }
     </script>
