@@ -37,8 +37,12 @@
 <body>
     <div class="container">
         <h2>Welcome to Clerk.io Authentication</h2>
+
+        <!-- Sign-Up and Sign-In Containers -->
         <div id="sign-up-container"></div>
         <div id="sign-in-container" style="display: none;"></div>
+
+        <!-- User Info after successful sign-in -->
         <div id="user-info" style="display: none;">
             <h3>Welcome, <span id="user-name"></span></h3>
             <button onclick="signOut()">Sign Out</button>
@@ -51,47 +55,51 @@
             frontendApi: 'your-clerk-frontend-api-key', // Replace with your actual Clerk Frontend API Key
         });
 
-        // Load Clerk UI and check user session status
+        // Load Clerk and check if the user is already signed in
         clerk.load().then(() => {
             if (clerk.user.isSignedIn()) {
-                showUserInfo();
+                showUserInfo();  // Show user info if they are signed in
             } else {
-                showSignUp();  // Show sign-up form if user is not signed in
+                showSignUp();  // Show the sign-up form if not signed in
             }
         });
 
-        // Show the Sign Up form
+        // Show the Sign-Up form
         function showSignUp() {
+            // Create Clerk SignUp UI component and display it in #sign-up-container
             clerk.ui.createSignUp({
                 element: '#sign-up-container',
-                afterSignUpUrl: window.location.href  // Redirect user after successful sign-up
+                afterSignUpUrl: window.location.href  // Redirect after sign-up is complete
             });
-            document.getElementById('sign-in-container').style.display = 'none';
+            document.getElementById('sign-in-container').style.display = 'none'; // Hide sign-in container
+            document.getElementById('sign-up-container').style.display = 'block'; // Show sign-up container
         }
 
-        // Show the Sign In form
+        // Show the Sign-In form
         function showSignIn() {
+            // Create Clerk SignIn UI component and display it in #sign-in-container
             clerk.ui.createSignIn({
                 element: '#sign-in-container',
-                afterSignInUrl: window.location.href  // Redirect user after successful sign-in
+                afterSignInUrl: window.location.href  // Redirect after sign-in is complete
             });
-            document.getElementById('sign-up-container').style.display = 'none';
+            document.getElementById('sign-up-container').style.display = 'none'; // Hide sign-up container
+            document.getElementById('sign-in-container').style.display = 'block'; // Show sign-in container
         }
 
-        // Show user info if signed in
+        // Show user info when they are signed in
         function showUserInfo() {
             const user = clerk.user;
             document.getElementById('user-name').textContent = user.firstName || "User";
-            document.getElementById('user-info').style.display = 'block';
-            document.getElementById('sign-up-container').style.display = 'none';
-            document.getElementById('sign-in-container').style.display = 'none';
+            document.getElementById('user-info').style.display = 'block'; // Show user info
+            document.getElementById('sign-up-container').style.display = 'none'; // Hide sign-up container
+            document.getElementById('sign-in-container').style.display = 'none'; // Hide sign-in container
         }
 
-        // Sign out user
+        // Sign out the user
         function signOut() {
             clerk.user.signOut().then(() => {
                 document.getElementById('user-info').style.display = 'none';
-                showSignIn();  // Show sign-in form after sign out
+                showSignIn(); // Show the sign-in form again after sign-out
             });
         }
     </script>
