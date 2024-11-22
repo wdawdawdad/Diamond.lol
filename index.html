@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Clerk.io Signup Example</title>
+    <title>Clerk.io Authentication</title>
     <script src="https://cdn.clerk.dev/clerk.js"></script>
     <style>
         body {
@@ -12,36 +12,78 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
+            margin: 0;
             background-color: #f4f4f4;
         }
         .container {
+            text-align: center;
             background-color: #fff;
             padding: 30px;
             border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            width: 400px;
         }
         h2 {
-            text-align: center;
+            margin-bottom: 20px;
+        }
+        #sign-up-container, #sign-in-container {
+            margin-top: 20px;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h2>Sign Up</h2>
+        <h2>Welcome to Clerk.io Authentication</h2>
         <div id="sign-up-container"></div>
+        <div id="sign-in-container" style="display: none;"></div>
+        <div id="user-info" style="display: none;">
+            <h3>Welcome, <span id="user-name"></span></h3>
+            <button onclick="signOut()">Sign Out</button>
+        </div>
     </div>
 
     <script>
-        // Initialize Clerk
-        const clerk = new Clerk({ 
-            frontendApi: "your-frontend-api-key", // Replace with your Clerk Frontend API Key
+        // Initialize Clerk with your Frontend API Key
+        const clerk = new Clerk({
+            frontendApi: 'your-clerk-frontend-api-key', // Replace with your Clerk Frontend API Key
         });
 
-        // Add Clerk Sign Up component
+        // Check if the user is already signed in
         clerk.load().then(() => {
-            clerk.ui.createSignUp({ element: "#sign-up-container" });
+            if (clerk.user.isSignedIn()) {
+                showUserInfo();
+            } else {
+                showSignUp();
+            }
         });
+
+        // Show the Sign Up form
+        function showSignUp() {
+            clerk.ui.createSignUp({ element: '#sign-up-container' });
+            document.getElementById('sign-in-container').style.display = 'none';
+        }
+
+        // Show the Sign In form
+        function showSignIn() {
+            clerk.ui.createSignIn({ element: '#sign-in-container' });
+            document.getElementById('sign-up-container').style.display = 'none';
+        }
+
+        // Show user info if signed in
+        function showUserInfo() {
+            const user = clerk.user;
+            document.getElementById('user-name').textContent = user.firstName;
+            document.getElementById('user-info').style.display = 'block';
+            document.getElementById('sign-up-container').style.display = 'none';
+            document.getElementById('sign-in-container').style.display = 'none';
+        }
+
+        // Sign out user
+        function signOut() {
+            clerk.user.signOut().then(() => {
+                document.getElementById('user-info').style.display = 'none';
+                showSignIn();
+            });
+        }
     </script>
 </body>
 </html>
