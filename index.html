@@ -50,21 +50,6 @@
       height: 40px;
     }
 
-    .nav-links {
-      display: flex;
-      gap: 2rem;
-    }
-
-    .nav-links a {
-      color: white;
-      text-decoration: none;
-      transition: color 0.3s;
-    }
-
-    .nav-links a:hover {
-      color: var(--primary-orange);
-    }
-
     .hero {
       height: 100vh;
       display: flex;
@@ -110,42 +95,13 @@
       text-decoration: none;
       font-weight: bold;
       transition: transform 0.3s, box-shadow 0.3s;
+      cursor: pointer;
     }
 
     .cta-button:hover {
       background-color: var(--secondary-orange);
       transform: translateY(-3px);
       box-shadow: 0 5px 15px rgba(255, 127, 80, 0.3);
-    }
-
-    .features {
-      padding: 4rem 2rem;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 2rem;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-
-    .feature-card {
-      background-color: var(--deep-purple);
-      padding: 2rem;
-      border-radius: 10px;
-      text-align: center;
-      transition: transform 0.3s;
-      border: 2px solid var(--light-purple);
-    }
-
-    .feature-card:hover {
-      transform: translateY(-5px);
-      border-color: var(--primary-orange);
-    }
-
-    .feature-icon {
-      width: 60px;
-      height: 60px;
-      margin-bottom: 1rem;
-      fill: var(--primary-orange) !important;
     }
 
     #auth-container {
@@ -162,7 +118,6 @@
       </svg>
       <h1>D1amond.lol</h1>
     </div>
-    <div class="nav-links"></div>
   </nav>
 
   <!-- Hero Section -->
@@ -170,7 +125,7 @@
     <h1>Premium Bot Hosting</h1>
     <p class="slogan">Effortless, Dependable, and Budget-Friendly.</p>
     <p class="sub-slogan">Join D1amond and Discover Cloud Hosting, Redefined.</p>
-    <a href="https://example.com/signup" class="cta-button">Get Started</a>
+    <button id="get-started" class="cta-button">Get Started</button>
     <div id="auth-container"></div>
   </section>
 
@@ -181,13 +136,13 @@
 
       await clerk.load();
 
-      if (clerk.user) {
-        document.getElementById("auth-container").innerHTML = `<div id="user-button"></div>`;
-        clerk.mountUserButton(document.getElementById("user-button"));
-      } else {
-        document.getElementById("auth-container").innerHTML = `<div id="sign-in"></div>`;
-        clerk.mountSignIn(document.getElementById("sign-in"));
-      }
+      const getStartedButton = document.getElementById("get-started");
+
+      getStartedButton.addEventListener("click", () => {
+        const authContainer = document.getElementById("auth-container");
+        authContainer.innerHTML = `<div id="sign-in"></div>`;
+        clerk.mountSignIn(authContainer.firstChild);
+      });
     });
   </script>
 </body>
