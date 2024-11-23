@@ -1,107 +1,432 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Clerk.io Authentication</title>
-    <script src="https://cdn.clerk.dev/clerk.js"></script>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            background-color: #f4f4f4;
-        }
-        .container {
-            text-align: center;
-            background-color: #fff;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-        h2 {
-            margin-bottom: 20px;
-        }
-        #sign-up-container, #sign-in-container {
-            margin-top: 20px;
-        }
-        #user-info {
-            display: none;
-            margin-top: 20px;
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <h2>Welcome to Clerk.io Authentication</h2>
+<html><head><base href="d1amond.lol"><title>d1amond.lol - Tools Hub</title>
+  <!-- Add Google AdSense code -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3298164608890743"
+     crossorigin="anonymous"></script>
+  <style>
+:root {
+  --neon-gray: #808080;
+  --light-gray: #a9a9a9;
+  --dark-bg: #000000;
+  --medium-gray: #666666;
+}
 
-        <!-- Sign-Up and Sign-In Containers -->
-        <div id="sign-up-container"></div>
-        <div id="sign-in-container" style="display: none;"></div>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Cyber', sans-serif;
+}
 
-        <!-- User Info after successful sign-in -->
-        <div id="user-info" style="display: none;">
-            <h3>Welcome, <span id="user-name"></span></h3>
-            <button onclick="signOut()">Sign Out</button>
-        </div>
+@font-face {
+  font-family: 'Cyber';
+  src: url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@700&display=swap');
+}
+
+body {
+  background-color: var(--dark-bg);
+  color: white;
+  min-height: 100vh;
+  overflow-x: hidden;
+  background-image: linear-gradient(45deg, #111111 25%, #161616 25%, #161616 50%, #111111 50%, #111111 75%, #161616 75%, #161616 100%);
+  background-size: 20px 20px;
+}
+
+.header {
+  position: relative;
+  padding: 2rem;
+  text-align: center;
+  background: linear-gradient(45deg, var(--neon-gray), var(--light-gray));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-size: 3rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5rem;
+  margin-bottom: 2rem;
+  animation: glow 2s ease-in-out infinite alternate;
+  padding-bottom: 3.5rem;
+  border-bottom: 2px solid var(--medium-gray);
+}
+
+.social-icons {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.social-icon {
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+  fill: var(--light-gray);
+}
+
+.social-icon:hover {
+  transform: scale(1.1);
+  fill: white;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  background: rgba(128,128,128,0.05);
+  border-radius: 20px;
+  box-shadow: 0 0 30px rgba(128,128,128,0.1);
+}
+
+.game-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 2rem;
+  padding: 2rem 0;
+}
+
+.game-card {
+  background: rgba(128,128,128,0.15);
+  border-radius: 15px;
+  padding: 1.5rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--medium-gray);
+}
+
+.game-card h3 {
+  color: var(--light-gray);
+  margin-bottom: 1rem;
+  border-bottom: 1px solid var(--medium-gray);
+  padding-bottom: 0.5rem;
+}
+
+.game-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0 20px var(--neon-gray);
+}
+
+.game-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(45deg, var(--neon-gray), var(--light-gray));
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: -1;
+}
+
+.game-card:hover::before {
+  opacity: 0.1;
+}
+
+.download-btn {
+  background: linear-gradient(45deg, var(--neon-gray), var(--light-gray));
+  border: none;
+  padding: 0.8rem 1.2rem;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+  margin-top: 1rem;
+  width: 100%;
+}
+
+.source-btn {
+  background: linear-gradient(45deg, var(--neon-gray), var(--light-gray));
+  border: none;
+  padding: 0.6rem 1rem;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+  margin-top: 0.5rem;
+  width: 80%;
+  font-size: 0.9rem;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.source-btn:hover {
+  transform: scale(1.05);
+  background: linear-gradient(45deg, var(--light-gray), var(--neon-gray));
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(5px);
+  z-index: 1000;
+}
+
+.modal-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(128,128,128,0.15);
+  padding: 2rem;
+  border-radius: 15px;
+  border: 1px solid var(--medium-gray);
+  width: 80%;
+  max-width: 600px;
+  color: white;
+}
+
+.close-modal {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 24px;
+  cursor: pointer;
+  color: var(--light-gray);
+}
+
+@keyframes glow {
+  from {
+    text-shadow: 0 0 5px var(--neon-gray), 0 0 10px var(--neon-gray);
+  }
+  to {
+    text-shadow: 0 0 10px var(--light-gray), 0 0 20px var(--light-gray);
+  }
+}
+
+.search-bar {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 1rem;
+  background: rgba(128,128,128,0.15);
+  border: 1px solid var(--neon-gray);
+  border-radius: 25px;
+  color: white;
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+  display: block;
+}
+
+.search-bar:focus {
+  outline: none;
+  box-shadow: 0 0 10px var(--neon-gray);
+  background: rgba(128,128,128,0.25);
+}
+
+.game-card p {
+  color: var(--light-gray);
+  margin: 0.5rem 0;
+  padding-left: 0.5rem;
+  border-left: 2px solid var(--medium-gray);
+}
+
+.timer {
+  font-size: 1.2rem;
+  text-align: center;
+  margin: 2rem 0;
+  color: var(--light-gray);
+}
+
+.download-link-btn {
+  background: linear-gradient(45deg, var(--neon-gray), var(--light-gray));
+  border: none;
+  padding: 1rem 1.5rem;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+  display: block;
+  margin: 0 auto;
+  font-size: 1.1rem;
+}
+
+.download-link-btn:hover {
+  transform: scale(1.05);
+  background: linear-gradient(45deg, var(--light-gray), var(--neon-gray));
+}
+</style></head><body>
+  <div class="header">
+    <h1>d1amond.lol</h1>
+    <div class="social-icons">
+      <svg class="social-icon discord-icon" viewBox="0 0 71 55" xmlns="http://www.w3.org/2000/svg">
+        <path d="M60.1045 4.8978C55.5792 2.8214 50.7265 1.2916 45.6527 0.41542C45.5603 0.39851 45.468 0.440769 45.4204 0.525289C44.7963 1.6353 44.105 3.0834 43.6209 4.2216C38.1637 3.4046 32.7345 3.4046 27.3892 4.2216C26.905 3.0581 26.1886 1.6353 25.5617 0.525289C25.5141 0.443589 25.4218 0.40133 25.3294 0.41542C20.2584 1.2888 15.4057 2.8186 10.8776 4.8978C10.8384 4.9147 10.8048 4.9429 10.7825 4.9795C1.57795 18.7309 -0.943561 32.1443 0.293408 45.3914C0.299005 45.4562 0.335386 45.5182 0.385761 45.5576C6.45866 50.0174 12.3413 52.7249 18.1147 54.5195C18.2071 54.5477 18.305 54.5139 18.3638 54.4378C19.7295 52.5728 20.9469 50.6063 21.9907 48.5383C22.0523 48.4172 21.9935 48.2735 21.8676 48.2256C19.9366 47.4931 18.0979 46.6 16.3292 45.5858C16.1893 45.5041 16.1781 45.304 16.3068 45.2082C16.679 44.9293 17.0513 44.6391 17.4067 44.3461C17.471 44.2926 17.5606 44.2813 17.6362 44.3151C29.2558 49.6202 41.8354 49.6202 53.3179 44.3151C53.3935 44.2785 53.4831 44.2898 53.5502 44.3433C53.9057 44.6363 54.2779 44.9293 54.6529 45.2082C54.7816 45.304 54.7732 45.5041 54.6333 45.5858C52.8646 46.6197 51.0259 47.4931 49.0921 48.2228C48.9662 48.2707 48.9102 48.4172 48.9718 48.5383C50.038 50.6034 51.2554 52.5699 52.5959 54.435C52.6519 54.5139 52.7526 54.5477 52.845 54.5195C58.6464 52.7249 64.529 50.0174 70.6019 45.5576C70.6551 45.5182 70.6887 45.459 70.6943 45.3942C72.1747 30.0791 68.2147 16.7757 60.1968 4.9823C60.1772 4.9429 60.1437 4.9147 60.1045 4.8978ZM23.7259 37.3253C20.2276 37.3253 17.3451 34.1136 17.3451 30.1693C17.3451 26.225 20.1717 23.0133 23.7259 23.0133C27.308 23.0133 30.1626 26.2532 30.1066 30.1693C30.1066 34.1136 27.28 37.3253 23.7259 37.3253ZM47.3178 37.3253C43.8196 37.3253 40.9371 34.1136 40.9371 30.1693C40.9371 26.225 43.7636 23.0133 47.3178 23.0133C50.9 23.0133 53.7545 26.2532 53.6986 30.1693C53.6986 34.1136 50.9 37.3253 47.3178 37.3253Z"/>
+      </svg>
+      <svg class="social-icon youtube-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+      </svg>
+      <svg class="social-icon help-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17h-2v-2h2v2zm2.07-7.75l-.9.92C13.45 12.9 13 13.5 13 15h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H8c0-2.21 1.79-4 4-4s4 1.79 4 4c0 .88-.36 1.68-.93 2.25z"/>
+      </svg>
     </div>
+  </div>
+  
+  <div class="container">
+    <input type="text" class="search-bar" placeholder="Search tools...">
+    
+    <div class="game-grid" id="gameGrid">
+      <!-- Tools will be dynamically added here -->
+    </div>
+  </div>
 
-    <script>
-        // Initialize Clerk with your Frontend API Key
-        const clerk = new Clerk({
-            frontendApi: 'your-clerk-frontend-api-key', // Replace with your actual Clerk Frontend API Key
-        });
+  <div class="modal" id="helpModal">
+    <div class="modal-content">
+      <span class="close-modal">&times;</span>
+      <h2>Help & Information</h2>
+      <p>Welcome to d1amond.lol! Here's what you need to know:</p>
+      <ul style="margin: 1rem 0 1rem 2rem;">
+        <li>All tools are original creations by d1amond.lol</li>
+        <li>Tools are regularly updated and maintained</li>
+        <li>Join our Discord community for support</li>
+        <li>Subscribe to our YouTube for updates</li>
+        <li>Report any issues on Discord</li>
+      </ul>
+      <p>Remember to use tools responsibly and at your own risk!</p>
+    </div>
+  </div>
 
-        // Load Clerk and check if the user is already signed in
-        clerk.load().then(() => {
-            if (clerk.user.isSignedIn()) {
-                showUserInfo();  // Show user info if they are signed in
-            } else {
-                showSignUp();  // Show the sign-up form if not signed in
-            }
-        });
+  <div class="modal" id="downloadModal">
+    <div class="modal-content">
+      <span class="close-modal download-close">&times;</span>
+      <h2>Preparing Download...</h2>
+      <div class="timer">Wait Time: <span id="countdown">5</span> seconds</div>
+      <div id="downloadLink" style="display: none;">
+        <button class="download-link-btn">Click to Download</button>
+      </div>
+    </div>
+  </div>
 
-        // Show the Sign-Up form
-        function showSignUp() {
-            // Create Clerk SignUp UI component and display it in #sign-up-container
-            clerk.ui.createSignUp({
-                element: '#sign-up-container',
-                afterSignUpUrl: window.location.href  // Redirect after sign-up is complete
-            });
-            document.getElementById('sign-in-container').style.display = 'none'; // Hide sign-in container
-            document.getElementById('sign-up-container').style.display = 'block'; // Show sign-up container
-        }
+<script>
+const games = [
+  {
+    title: "Network Scanner Pro",
+    size: "125 MB",
+    date: "2023-09-21"
+  },
+  {
+    title: "System Optimizer",
+    size: "84 MB",
+    date: "2023-09-20"
+  }
+];
 
-        // Show the Sign-In form
-        function showSignIn() {
-            // Create Clerk SignIn UI component and display it in #sign-in-container
-            clerk.ui.createSignIn({
-                element: '#sign-in-container',
-                afterSignInUrl: window.location.href  // Redirect after sign-in is complete
-            });
-            document.getElementById('sign-up-container').style.display = 'none'; // Hide sign-up container
-            document.getElementById('sign-in-container').style.display = 'block'; // Show sign-in container
-        }
+function createGameCard(game) {
+  return `
+    <div class="game-card">
+      <h3>${game.title}</h3>
+      <p>Size: ${game.size}</p>
+      <p>Release Date: ${game.date}</p>
+      <button class="download-btn">Download Tool</button>
+      <button class="source-btn">Source</button>
+    </div>
+  `;
+}
 
-        // Show user info when they are signed in
-        function showUserInfo() {
-            const user = clerk.user;
-            document.getElementById('user-name').textContent = user.firstName || "User";
-            document.getElementById('user-info').style.display = 'block'; // Show user info
-            document.getElementById('sign-up-container').style.display = 'none'; // Hide sign-up container
-            document.getElementById('sign-in-container').style.display = 'none'; // Hide sign-in container
-        }
+function renderGames(gamesArray) {
+  const gameGrid = document.getElementById('gameGrid');
+  gameGrid.innerHTML = gamesArray.map(game => createGameCard(game)).join('');
+}
 
-        // Sign out the user
-        function signOut() {
-            clerk.user.signOut().then(() => {
-                document.getElementById('user-info').style.display = 'none';
-                showSignIn(); // Show the sign-in form again after sign-out
-            });
-        }
-    </script>
-</body>
-</html>
+// Initial render
+renderGames(games);
+
+// Search functionality
+document.querySelector('.search-bar').addEventListener('input', (e) => {
+  const searchTerm = e.target.value.toLowerCase();
+  const filteredGames = games.filter(game => 
+    game.title.toLowerCase().includes(searchTerm)
+  );
+  renderGames(filteredGames);
+});
+
+// Modal functionality
+const modal = document.getElementById('helpModal');
+const helpIcon = document.querySelector('.help-icon');
+const closeModal = document.querySelector('.close-modal');
+
+helpIcon.addEventListener('click', () => {
+  modal.style.display = 'block';
+});
+
+closeModal.addEventListener('click', () => {
+  modal.style.display = 'none';
+});
+
+window.addEventListener('click', (e) => {
+  if (e.target === modal) {
+    modal.style.display = 'none';
+  }
+});
+
+// Replace the download button functionality
+document.addEventListener('click', (e) => {
+  if (e.target.classList.contains('download-btn')) {
+    const downloadModal = document.getElementById('downloadModal');
+    const countdownElement = document.getElementById('countdown');
+    const downloadLink = document.getElementById('downloadLink');
+    
+    downloadModal.style.display = 'block';
+    downloadLink.style.display = 'none';
+    
+    let timeLeft = 5;
+    countdownElement.textContent = timeLeft;
+    
+    const countdown = setInterval(() => {
+      timeLeft--;
+      countdownElement.textContent = timeLeft;
+      
+      if (timeLeft <= 0) {
+        clearInterval(countdown);
+        downloadLink.style.display = 'block';
+      }
+    }, 1000);
+  }
+});
+
+// Add download modal close functionality
+document.querySelector('.download-close').addEventListener('click', () => {
+  document.getElementById('downloadModal').style.display = 'none';
+});
+
+// Add source button functionality - update to use GitHub
+document.addEventListener('click', (e) => {
+  if (e.target.classList.contains('source-btn')) {
+    window.open('https://github.com/d1amond', '_blank');
+  }
+});
+
+// Add download link button functionality
+document.addEventListener('click', (e) => {
+  if (e.target.classList.contains('download-link-btn')) {
+    const downloadModal = document.getElementById('downloadModal');
+    downloadModal.style.display = 'none';
+    window.open('https://download.example.com', '_blank');
+  }
+});
+
+// Additional modal click-outside-to-close functionality
+window.addEventListener('click', (e) => {
+  const downloadModal = document.getElementById('downloadModal');
+  if (e.target === downloadModal) {
+    downloadModal.style.display = 'none';
+  }
+});
+
+// Social icons click handlers
+document.querySelector('.discord-icon').addEventListener('click', () => {
+  window.open('https://discord.gg/pEWhkPEG4F', '_blank');
+});
+
+document.querySelector('.youtube-icon').addEventListener('click', () => {
+  window.open('https://www.youtube.com/@noxiwastaken', '_blank');
+});
+</script>
+</body></html>
